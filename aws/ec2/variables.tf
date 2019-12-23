@@ -2,7 +2,7 @@
 Variables
 *********/
 variable "aws-region" {
-  type    = "string" 
+  type    = "string"
 }
 variable "prefix" {}
 variable "email" {}
