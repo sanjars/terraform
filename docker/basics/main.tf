@@ -1,5 +1,6 @@
 # Download the latest Ghost image
 resource "docker_image" "image_id" {
+  # can be either ghost:latest or ghost:alpine 
   name = "ghost:latest"
 }
 
