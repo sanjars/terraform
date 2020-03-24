@@ -21,6 +21,6 @@ resource "docker_container" "container_id" {
 
 resource "null_resource" "null_id" {
   provisioner "local-exec" {
-    command = "echo ${docker_container.container_id.name}:${docker_container.container_id.ip_address} >> container.txt"
+    command = "echo ${docker_container.container_id.name}:${docker_container.container_id.ip_address} >> ${lookup(var.container_name, var.env)}.txt"
   }
 }
