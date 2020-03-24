@@ -1,14 +1,20 @@
 # Download the latest Ghost image
+# terraform plan -out=tfdev_plan -var env=dev
+# terraform apply tfdev_plan
+# terraform destroy -var env=dev
+# terraform plan -out=tfprod_plan -var env=prod
+# terraform apply tfprod_plan
+# terraform destroy -var env=prod
+
 resource "docker_image" "image_id" {
-  # can be either ghost:latest or ghost:alpine 
-  name = "ghost:latest"
+  name = lookup(var.image_name, var.env)
 }
 
 resource "docker_container" "container_id" {
-  name  = "ghost_blog"
+  name  = lookup(var.container_name, var.env)
   image = docker_image.image_id.latest
   ports {
-    internal = "2368"
-    external = "80"
+    internal = var.int_port
+    external = lookup(var.ext_port, var.env)
   }
 }
