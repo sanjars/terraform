@@ -4,7 +4,7 @@ module "image" {
 }
 
 module "container" {
-  source         = "sourc./modules/container"
+  source         = "./modules/container"
   image          = module.image.image_out
   container_name = var.container
   int_port       = var.int_port
