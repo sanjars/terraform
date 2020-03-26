@@ -3,7 +3,7 @@ module "image" {
   image_name = var.image_name
 }
 
-module "" container "" {
+module "container" {
   source         = "sourc./modules/container"
   image          = module.image.image_out
   container_name = var.container
