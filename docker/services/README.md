@@ -1,17 +1,29 @@
 ## Deploy
 
-`terraform init`
+```bash
+terraform init
+```
 
-`terraform plan -var "ext_port=8082"`
+```bash
+terraform plan -var "ext_port=8082"
+```
 
-`terraform apply --auto-approve -var "ext_port=8082"`
+```bash
+terraform apply --auto-approve -var "ext_port=8082"
+```
 
 ## Verify
 
-`docker service ls`
+```bash
+docker service ls
+```
 
-`docker container ls`
+```bash
+docker container ls
+```
 
-You should see only one container, and that is normal because there are 2 containers and each container is running in 2 different hosts.
+```bash
+docker ps
+```
 
-`docker ps`
+**Note!** You should see only one container, and that is normal because there are 2 containers and each container is running in 2 different hosts.
