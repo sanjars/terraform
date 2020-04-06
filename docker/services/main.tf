@@ -34,8 +34,12 @@ resource "docker_service" "mysql-service" {
     container_spec {
       image = docker_image.mysql_image.name
 
+      #env {
+      #  MYSQL_ROOT_PASSWORD = var.mysql_root_password
+      #}
+
       env {
-        MYSQL_ROOT_PASSWORD = var.mysql_root_password
+         MYSQL_ROOT_PASSWORD = var.mysql_root_password
       }
 
       mounts {
