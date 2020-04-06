@@ -34,11 +34,11 @@ resource "docker_service" "mysql-service" {
     container_spec {
       image = docker_image.mysql_image.name
 
-    env {
+      env {
         MYSQL_ROOT_PASSWORD = var.mysql_root_password
-      }
+        }
 
-    mounts = {
+      mounts = {
           target = "/var/lib/mysql"
           source = docker_volume.mysql_data_volume.name
           type   = "volume"
