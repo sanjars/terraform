@@ -10,7 +10,7 @@ resource "docker_container" "mysql_container" {
   }
   volumes {
     volume_name = docker_volume.mysql_data_volume.name
-    container_paht = "/var/lib/mysql"
+    container_path = "/var/lib/mysql"
   }
 }
 
