@@ -5,7 +5,7 @@ resource "docker_service" "ghost-service" {
     container_spec {
       image = "${docker_image.ghost_image.name}"
 
-      env {
+      env = {
          database__client               = "mysql"
          database__connection__host     = "${var.mysql_network_alias}"
          database__connection__user     = "${var.ghost_db_username}"
@@ -34,7 +34,7 @@ resource "docker_service" "mysql-service" {
     container_spec {
       image = "${docker_image.mysql_image.name}"
 
-      env {
+      env = {
         MYSQL_ROOT_PASSWORD = "${var.mysql_root_password}"
       }
 
