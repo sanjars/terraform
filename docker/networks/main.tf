@@ -1,3 +1,23 @@
+resource "docker_container" "mysql_container" {
+  name  = "ghost_database"
+  image = docker_image.mysql_image.name
+  env = [
+    "MYSQL_ROOT_PASSWORD=${var.mysql_root_password}"
+  ]
+  networks_advanced {
+    name    = docker_network.private_bridge_network.name
+    aliases = [var.mysql_network_alias]
+  }
+}
+
+resource "null_resource" "sleep" {
+  depends_on = [docker_container.mysql.container]
+  provisioner "local-exec" {
+      command = "sleep 15s"
+  }
+}
+
+
 resource "docker_container" "blog_container" {
   name  = "ghost_blog"
   image = docker_image.ghost_image.name
@@ -19,17 +39,5 @@ resource "docker_container" "blog_container" {
   networks_advanced {
     name    = docker_network.private_bridge_network.name
     aliases = [var.ghost_network_alias]
-  }
-}
-
-resource "docker_container" "mysql_container" {
-  name  = "ghost_database"
-  image = docker_image.mysql_image.name
-  env = [
-    "MYSQL_ROOT_PASSWORD=${var.mysql_root_password}"
-  ]
-  networks_advanced {
-    name    = docker_network.private_bridge_network.name
-    aliases = [var.mysql_network_alias]
   }
 }
