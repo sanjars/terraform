@@ -11,7 +11,7 @@ resource "docker_container" "mysql_container" {
 }
 
 resource "null_resource" "sleep" {
-  depends_on = [docker_container.mysql.container]
+  depends_on = [docker_container.mysql_container]
   provisioner "local-exec" {
     command = "sleep 15s"
   }
