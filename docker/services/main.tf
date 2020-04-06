@@ -38,13 +38,11 @@ resource "docker_service" "mysql-service" {
         MYSQL_ROOT_PASSWORD = var.mysql_root_password
       }
 
-    mounts = [
-        {
+    mounts = {
           target = "/var/lib/mysql"
           source = docker_volume.mysql_data_volume.name
           type   = "volume"
         }
-      ]
     }
     networks = [docker_network.private_bridge_network.name]
   }
