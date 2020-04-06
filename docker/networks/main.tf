@@ -13,14 +13,15 @@ resource "docker_container" "mysql_container" {
 resource "null_resource" "sleep" {
   depends_on = [docker_container.mysql.container]
   provisioner "local-exec" {
-      command = "sleep 15s"
+    command = "sleep 15s"
   }
 }
 
 
 resource "docker_container" "blog_container" {
-  name  = "ghost_blog"
-  image = docker_image.ghost_image.name
+  name       = "ghost_blog"
+  image      = docker_image.ghost_image.name
+  depends_on = [null_resource.sleep, docker_container.mysql_container]
   env = [
     "database__client=mysql",
     "database__connection__host=${var.mysql_network_alias}",
