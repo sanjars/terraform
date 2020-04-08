@@ -9,8 +9,9 @@ resource "docker_service" "mysql-service" {
           secret_id   = "${docker_secret.mysql_root_password.id}"
           secret_name = "${docker_secret.mysql_root_password.name}"
           file_name   = "/run/secrets/${docker_secret.mysql_root_password.name}"
-        },
-        {
+        }
+
+      secrets {
           secret_id   = "${docker_secret.mysql_db_password.id}"
           secret_name = "${docker_secret.mysql_db_password.name}"
           file_name   = "/run/secrets/${docker_secret.mysql_db_password.name}"
@@ -18,7 +19,7 @@ resource "docker_service" "mysql-service" {
 
 
       env = {
-        MYSQL_ROOT_PASSWORD_FILE = "/run/secrets/${docker_secret.mysql_root_password.name}"   # consumes the secret from the file location above
+        MYSQL_ROOT_PASSWORD_FILE = "/run/secrets/${docker_secret.mysql_root_password.name}"
         MYSQL_DATABASE           = "mydb"
         MYSQL_PASSWORD_FILE      = "/run/secrets/${docker_secret.mysql_db_password.name}"
       }
@@ -28,6 +29,7 @@ resource "docker_service" "mysql-service" {
           source = "${docker_volume.mysql_data_volume.name}"
           type   = "volume"
         }
+
     }
     networks = [
       "${docker_network.private_overlay_network.name}"
