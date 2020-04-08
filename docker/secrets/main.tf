@@ -6,16 +6,16 @@ resource "docker_service" "mysql-service" {
       image = "${docker_image.mysql_image.name}"
 
       secrets {
-          secret_id   = "${docker_secret.mysql_root_password.id}"
-          secret_name = "${docker_secret.mysql_root_password.name}"
-          file_name   = "/run/secrets/${docker_secret.mysql_root_password.name}"
-        }
+        secret_id   = "${docker_secret.mysql_root_password.id}"
+        secret_name = "${docker_secret.mysql_root_password.name}"
+        file_name   = "/run/secrets/${docker_secret.mysql_root_password.name}"
+      }
 
       secrets {
-          secret_id   = "${docker_secret.mysql_db_password.id}"
-          secret_name = "${docker_secret.mysql_db_password.name}"
-          file_name   = "/run/secrets/${docker_secret.mysql_db_password.name}"
-        }
+        secret_id   = "${docker_secret.mysql_db_password.id}"
+        secret_name = "${docker_secret.mysql_db_password.name}"
+        file_name   = "/run/secrets/${docker_secret.mysql_db_password.name}"
+      }
 
 
       env = {
@@ -25,10 +25,10 @@ resource "docker_service" "mysql-service" {
       }
 
       mounts {
-          target = "/var/lib/mysql"
-          source = "${docker_volume.mysql_data_volume.name}"
-          type   = "volume"
-        }
+        target = "/var/lib/mysql"
+        source = "${docker_volume.mysql_data_volume.name}"
+        type   = "volume"
+      }
 
     }
     networks = [

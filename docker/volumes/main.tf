@@ -9,7 +9,7 @@ resource "docker_container" "mysql_container" {
     aliases = [var.mysql_network_alias]
   }
   volumes {
-    volume_name = docker_volume.mysql_data_volume.name
+    volume_name    = docker_volume.mysql_data_volume.name
     container_path = "/var/lib/mysql"
   }
 }

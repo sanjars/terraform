@@ -6,11 +6,11 @@ resource "docker_service" "ghost-service" {
       image = "${docker_image.ghost_image.name}"
 
       env = {
-         database__client               = "mysql"
-         database__connection__host     = "${var.mysql_network_alias}"
-         database__connection__user     = "${var.ghost_db_username}"
-         database__connection__password = "${var.mysql_root_password}"
-         database__connection__database = "${var.ghost_db_name}"
+        database__client               = "mysql"
+        database__connection__host     = "${var.mysql_network_alias}"
+        database__connection__user     = "${var.ghost_db_username}"
+        database__connection__password = "${var.mysql_root_password}"
+        database__connection__database = "${var.ghost_db_name}"
       }
     }
     networks = [
@@ -39,10 +39,10 @@ resource "docker_service" "mysql-service" {
       }
 
       mounts {
-          target = "/var/lib/mysql"
-          source = "${docker_volume.mysql_data_volume.name}"
-          type   = "volume"
-        }
+        target = "/var/lib/mysql"
+        source = "${docker_volume.mysql_data_volume.name}"
+        type   = "volume"
+      }
     }
     networks = ["${docker_network.private_bridge_network.name}"]
   }
