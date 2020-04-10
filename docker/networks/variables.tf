@@ -1,6 +1,6 @@
 variable "mysql_root_password" {
   description = "mysql root pass"
-  default     = "@covid192020"
+  default     = "my_pass_here"
 }
 variable "ghost_db_username" {
   description = "ghost blog db user"
